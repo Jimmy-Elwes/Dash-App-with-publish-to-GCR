@@ -40,6 +40,10 @@ If everything works fine, you can proceed to build your Dockerfile.
 
 ## 2. Check or Build the Dockerfile
 
+Docker Image: Think of a Docker image like a blueprint or a recipe. It's a file that contains everything your app needs to run, including the app code, system libraries, and dependencies (like Python or Dash). But, it's not running yet—it's just the instructions.
+
+Docker Container: A Docker container is like a fully built version of that image, now "alive" and running. It uses the blueprint (the image) to run your app in a completely isolated environment, so it works the same no matter where it's running—on your computer, in the cloud, or anywhere else.
+
 Ensure your `Dockerfile` is correctly set up to build the Dash app with Gunicorn. Here's an example of what the `Dockerfile` should look like:
 
 ```Dockerfile
