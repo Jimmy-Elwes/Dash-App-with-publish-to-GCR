@@ -189,3 +189,30 @@ Google Cloud Run automatically scales your app based on traffic. However, you ca
 ```bash
 gcloud run services update my-dash-app --min-instances 1 --max-instances 10
 ```
+
+## 12. Cloud Build yaml
+
+Alternatively you can use a cloud build yaml file to go through the steps automatically:
+
+```bash
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/[project-id]/my-dash-app', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/[project-id]/my-dash-app']
+
+# Deploy the image to Google Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'my-dash-app',
+         '--image', 'gcr.io/[project-id]/my-dash-app',
+         '--region', 'us-central1',
+         '--platform', 'managed',
+         '--allow-unauthenticated']
+
+images:
+- gcr.io/[project-id]/my-dash-app
+```
+
+```bash
+gcloud builds submit --config cloudbuild.yaml .
+```
